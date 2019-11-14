@@ -12,6 +12,7 @@ void TextPanel::init()
                                                  "Enter Text:");
 												 
 	textbox = new wxTextCtrl(textInput_panel, wxID_ANY, "");
+	textbox->SetSizeHints(200,40);
 	
 	wxButton *translate_button     = new wxButton(textInput_panel, wxID_ANY,
                                              textbox->GetValue());
@@ -30,7 +31,9 @@ void TextPanel::init()
 	
 	wxStaticText *out = new wxStaticText(textOutput_panel, wxID_ANY,
                                                  "Output:");
-	output_text = new wxStaticText(textOutput_panel, wxID_ANY, "[Morse Code Here]");
+	output_text = new wxTextCtrl(textOutput_panel, wxID_ANY, "");
+	output_text->SetEditable(false);
+	output_text->SetSizeHints(350,40);
     output_text->SetFont(output_text->GetFont().Larger());
 	
 	textOutput_sizer->Add(out, 0, wxALIGN_CENTER, 0);
@@ -39,7 +42,6 @@ void TextPanel::init()
     textOutput_sizer->AddSpacer(10);
 	
     textOutput_panel->SetSizer(textOutput_sizer);
-	
 	// ------------------------------------------------------------------------------------
 	
 	main_sizer->Add(textInput_panel, 0, wxALIGN_CENTER, 0);
@@ -56,5 +58,83 @@ void TextPanel::onClickTranslate(wxCommandEvent& event)
 
 void TextPanel::translate()
 {
-	output_text->SetLabelText(textbox->GetValue());
+	if (morseCodeOutput)
+		output_text->ChangeValue(stringToMorse(textbox->GetValue()));
+	else
+	{
+		//output_text->ChangeValue(morseToString(textbox->GetValue()));
+		output_text->ChangeValue("Not implemented yet");
+	}
+}
+
+void TextPanel::setMorseCoutOutput(bool in)
+{
+	morseCodeOutput = in;
+}
+
+/*====CHANGE THIS IMPLEMENTATION!!!====*/
+wxString TextPanel::stringToMorse(wxString input)
+{
+	input.MakeLower();
+	wxString output = "";
+	
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (input[i] == 'a')
+			output += ".- ";
+		else if (input[i] == 'b')
+			output += "-... ";
+		else if (input[i] == 'c')
+			output += "-.-. ";
+		else if (input[i] == 'd')
+			output += "-.. ";
+		else if (input[i] == 'e')
+			output += ". ";
+		else if (input[i] == 'f')
+			output += "..-. ";
+		else if (input[i] == 'g')
+			output += "--. ";
+		else if (input[i] == 'h')
+			output += ".... ";
+		else if (input[i] == 'i')
+			output += ".. ";
+		else if (input[i] == 'j')
+			output += ".--- ";
+		else if (input[i] == 'k')
+			output += "-.- ";
+		else if (input[i] == 'l')
+			output += ".-.. ";
+		else if (input[i] == 'm')
+			output += "-- ";
+		else if (input[i] == 'n')
+			output += "-. ";
+		else if (input[i] == 'o')
+			output += "--- ";
+		else if (input[i] == 'p')
+			output += ".--. ";
+		else if (input[i] == 'q')
+			output += "--.- ";
+		else if (input[i] == 'r')
+			output += ".-. ";
+		else if (input[i] == 's')
+			output += "... ";
+		else if (input[i] == 't')
+			output += "- ";
+		else if (input[i] == 'u')
+			output += "..- ";
+		else if (input[i] == 'v')
+			output += "...- ";
+		else if (input[i] == 'w')
+			output += ".-- ";
+		else if (input[i] == 'x')
+			output += "-..- ";
+		else if (input[i] == 'y')
+			output += "-.-- ";
+		else if (input[i] == 'z')
+			output += "--.. ";
+		else if (input[i] == ' ')
+			output += "/ ";
+	}
+	
+	return output;
 }

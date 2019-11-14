@@ -9,7 +9,8 @@ class Frame : public wxFrame
 public:
 	Frame(const wxString& title);
 private:
-    void OnHello(wxCommandEvent& event);
+    void OnStringtoMorse(wxCommandEvent& event);
+	void OnMorsetoString(wxCommandEvent& event);
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
 	
@@ -20,7 +21,8 @@ private:
 
 enum
 {
-	ID_Hello = 2
+	ID_STOMC = 1,
+	ID_MCTOS = 2
 };
 
 #endif

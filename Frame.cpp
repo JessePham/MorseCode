@@ -7,8 +7,11 @@ Frame::Frame(const wxString& title)
             text_panel(new TextPanel(this))
 {
     wxMenu *menuFile = new wxMenu;
-    menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
+    menuFile->Append(ID_STOMC, "&String to Morse Code\tCtrl-H",
                      "Help string shown in status bar for this menu item");
+    menuFile->AppendSeparator();
+	menuFile->Append(ID_MCTOS, "&Morse Code to String\tCtrl-J",
+					 "Morse Code to String");
     menuFile->AppendSeparator();
     menuFile->Append(wxID_EXIT);
     wxMenu *menuHelp = new wxMenu;
@@ -18,7 +21,7 @@ Frame::Frame(const wxString& title)
     menuBar->Append( menuHelp, "&Help" );
     SetMenuBar( menuBar );
     CreateStatusBar();
-    SetStatusText( "Welcome to wxWidgets!" );
+    SetStatusText( "Morse Code Generator" );
 	
 	wxSizer *frame_sizer = new wxBoxSizer(wxVERTICAL);
 	
@@ -43,11 +46,18 @@ void Frame::OnExit(wxCommandEvent& event)
 
 void Frame::OnAbout(wxCommandEvent& event)
 {
-    wxMessageBox( "This is a wxWidgets' Hello world sample",
-                  "About Hello World", wxOK | wxICON_INFORMATION );
+    wxMessageBox( "This application translates characters into morse code.",
+                  "About Morse Code Generator", wxOK | wxICON_INFORMATION );
 }
 
-void Frame::OnHello(wxCommandEvent& event)
+void Frame::OnStringtoMorse(wxCommandEvent& event)
 {
-    wxLogMessage("Hello world from wxWidgets!");
+	text_panel->setMorseCoutOutput(true);
+    wxLogMessage("Switched to String to Morse Code");
+}
+
+void Frame::OnMorsetoString(wxCommandEvent& event)
+{
+	text_panel->setMorseCoutOutput(false);
+	wxLogMessage("Switched to Morse Code to String");
 }
