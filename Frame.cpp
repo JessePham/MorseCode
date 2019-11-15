@@ -7,10 +7,10 @@ Frame::Frame(const wxString& title)
             text_panel(new TextPanel(this))
 {
     wxMenu *menuFile = new wxMenu;
-    menuFile->Append(ID_STOMC, "&String to Morse Code\tCtrl-H",
-                     "Help string shown in status bar for this menu item");
+    menuFile->Append(ID_STOMC, "&String to Morse Code\tCtrl-S",
+                     "String to Morse Code");
     menuFile->AppendSeparator();
-	menuFile->Append(ID_MCTOS, "&Morse Code to String\tCtrl-J",
+	menuFile->Append(ID_MCTOS, "&Morse Code to String\tCtrl-M",
 					 "Morse Code to String");
     menuFile->AppendSeparator();
     menuFile->Append(wxID_EXIT);

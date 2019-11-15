@@ -62,8 +62,8 @@ void TextPanel::translate()
 		output_text->ChangeValue(stringToMorse(textbox->GetValue()));
 	else
 	{
-		//output_text->ChangeValue(morseToString(textbox->GetValue()));
-		output_text->ChangeValue("Not implemented yet");
+		output_text->ChangeValue(morseToString(textbox->GetValue()));
+		//output_text->ChangeValue("Not implemented yet");
 	}
 }
 
@@ -134,7 +134,375 @@ wxString TextPanel::stringToMorse(wxString input)
 			output += "--.. ";
 		else if (input[i] == ' ')
 			output += "/ ";
+		else if (input[i] == '1')
+			output += ".---- ";
+		else if (input[i] == '2')
+			output += "..--- ";
+		else if (input[i] == '3')
+			output += "...-- ";
+		else if (input[i] == '4')
+			output += "....- ";
+		else if (input[i] == '5')
+			output += "..... ";
+		else if (input[i] == '6')
+			output += "-.... ";
+		else if (input[i] == '7')
+			output += "--... ";
+		else if (input[i] == '8')
+			output += "---.. ";
+		else if (input[i] == '9')
+			output += "----. ";
+		else if (input[i] == '0')
+			output += "----- ";
 	}
 	
 	return output;
+}
+
+wxString TextPanel::morseToString(wxString input)
+{
+	wxString output_string = "";
+	int i = 0;
+	
+	while (i < input.length())
+	{
+		if (input[i] == '.')	// First dot
+		{
+			i++;
+			if (input[i] == ' ')
+			{
+				output_string += 'e';
+				i++;
+				continue;
+			}
+			else if (input[i] == '.')	// Second dot
+			{
+				i++;
+				if (input[i] == ' ')
+				{
+					output_string += 'i';
+					i++;
+					continue;
+				}
+				else if (input[i] == '.')	// Third dot
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 's';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')	// Fourth dot
+					{
+						i++;
+						if (input[i] == ' ')
+						{
+							output_string += 'h';
+							i++;
+							continue;
+						}
+						else if (input[i] == '.')
+						{
+							output_string += '5';
+							i++;
+							continue;
+						}
+						else if (input[i] == '-')
+						{
+							output_string += '4';
+							i++;
+							continue;
+						}
+					}
+					else if (input[i] == '-')
+					{
+						i++;
+						if (input[i] == ' ')
+						{
+							output_string += 'v';
+							i++;
+							continue;
+						}
+						else if (input[i] == '-')
+						{
+							output_string += '3';
+							i++;
+							continue;
+						}
+					}
+				}
+				else if (input[i] == '-')
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 'u';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')
+					{
+						output_string += 'f';
+						i++;
+						continue;
+					}
+					else if (input[i] == '-')
+					{
+						i++;
+						if (input[i] == '-')
+						{
+							output_string += '2';
+							i++;
+							continue;
+						}
+						
+						else
+						{
+							output_string = "Invalid";
+							break;
+						}
+					}
+				}
+				
+			}
+			
+			else if (input[i] == '-')
+			{
+				i++;
+				if (input[i] == ' ')
+				{
+					output_string += 'a';
+						i++;
+					continue;
+				}
+				else if (input[i] == '.')
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 'r';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')
+					{
+						output_string += 'l';
+						i++;
+						continue;
+					}
+				}
+				else if (input[i] == '-')
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 'w';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')
+					{
+						output_string += 'p';
+						i++;
+						continue;
+					}
+					else if (input[i] == '-')
+					{
+						i++;
+						if (input[i] == ' ')
+						{
+							output_string += 'j';
+							i++;
+							continue;
+						}
+						else if (input[i] == '-')
+						{
+							output_string += '1';
+							i++;
+							continue;
+						}
+					}
+				}
+			}
+		}
+		
+		else if (input[i] == '-') // STARTS WITH DASH
+		{
+			i++;
+			if (input[i] == ' ')
+			{
+				output_string += 't';
+				i++;
+				continue;
+			}
+			else if (input[i] == '.')	// Second
+			{
+				i++;
+				if (input[i] == ' ')
+				{
+					output_string += 'n';
+					i++;
+					continue;
+				}
+				else if (input[i] == '.')	// Third
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 'd';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')	// Fourth
+					{
+						i++;
+						if (input[i] == ' ')
+						{
+							output_string += 'b';
+							i++;
+							continue;
+						}
+						else if (input[i] == '.')
+						{
+							output_string += '6';
+							i++;
+							continue;
+						}
+					}
+					else if (input[i] == '-')
+					{
+						output_string += 'x';
+						i++;
+						continue;
+					}
+				}
+				else if (input[i] == '-')
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 'k';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')
+					{
+						output_string += 'c';
+						i++;
+						continue;
+					}
+					else if (input[i] == '-')
+					{
+						output_string += 'y';
+						i++;
+						continue;
+					}
+				}
+				
+			}
+			
+			else if (input[i] == '-')		// SECOND
+			{
+				i++;
+				if (input[i] == ' ')
+				{
+					output_string += 'm';
+						i++;
+					continue;
+				}
+				else if (input[i] == '.')		// THIRD
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 'g';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')		// FOURTH
+					{
+						i++;
+						if (input[i] == ' ')
+						{
+							output_string += 'z';
+							i++;
+							continue;
+						}
+						
+						else if (input[i] == '.')
+						{
+							output_string += '7';
+							i++;
+							continue;
+						}
+					}
+					else if (input[i] == '-')
+					{
+						output_string += 'q';
+						i++;
+						continue;
+					}
+				}
+				else if (input[i] == '-')
+				{
+					i++;
+					if (input[i] == ' ')
+					{
+						output_string += 'o';
+						i++;
+						continue;
+					}
+					else if (input[i] == '.')
+					{
+						i++;
+						if (input[i] == '.')
+						{
+							output_string += '8';
+							i++;
+							continue;
+						}
+						
+						else
+						{
+							output_string = "Invalid";
+							break;
+						}
+					}
+					else if (input[i] == '-')
+					{
+						i++;
+						if (input[i] == '.')
+						{
+							output_string += '9';
+							i++;
+							continue;
+						}
+						else if (input[i] == '-')
+						{
+							output_string += '0';
+							i++;
+							continue;
+						}
+					}
+				}
+			}
+		}
+		else if (input[i] == '/')
+		{
+			output_string += ' ';
+			i++;
+		}
+		else if (input[i] == ' ')
+		{
+			i++;
+		}
+		else
+		{
+			output_string = "Invalid Morse Code";
+			break;
+		}
+	}
+	
+	return output_string;
 }
