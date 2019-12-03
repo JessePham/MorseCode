@@ -10,11 +10,12 @@ class MorsetoString : public Convert
     MorsetoString();
     void translate(wxTextCtrl *output_text, wxTextCtrl *textbox);
     wxString wxTranslate(wxString input);
+    wxString clear();
     void parseWhiteSpace(wxString input);
 
     private:
     void mapCreate();
-    wxString mLetter[500];
+    wxString mLetter;
     wxString output;
     std::map<std::string,int> StringIntMap;
 

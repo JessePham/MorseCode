@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "StringtoMorse.hpp"
+#include "MorsetoString.hpp"
 #include <wx/textentry.h>
 
 class TextPanel : public wxPanel
@@ -19,6 +20,7 @@ private:
 	wxTextCtrl *textbox;
 	wxTextCtrl *output_text;
 	StringtoMorse S2M;
+	MorsetoString M2S;
 	wxString stringToMorse(wxString);
 	wxString morseToString(wxString);
 	

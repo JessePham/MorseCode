@@ -54,9 +54,17 @@ void TextPanel::init()
 
 void TextPanel::onClickTranslate(wxCommandEvent& event)
 {
-	
+	if(morseCodeOutput)
+	{
 	output_text->ChangeValue(S2M.clear());
 	S2M.translate(output_text,textbox);
+	}
+	else
+	{
+	output_text->ChangeValue(M2S.clear());
+	M2S.translate(output_text,textbox);
+	}
+	
 }
 
 void TextPanel::translate()

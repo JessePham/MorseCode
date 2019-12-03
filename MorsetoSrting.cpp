@@ -8,13 +8,22 @@ MorsetoString::MorsetoString()
 void MorsetoString::translate(wxTextCtrl *output_text, wxTextCtrl *textbox)
 {
         wxString input = textbox->GetValue();
-        parseWhiteSpace(input);
-        int arraySize =  WXSIZEOF(mLetter);
-        for(int i = 0; i<arraySize; i++)
+        mLetter = "";
+        for(int i = 0; i<input.length(); i++)
         {
-        output += wxTranslate(mLetter[i]);
-        output_text->ChangeValue(output);
+            if(input[i] == ' ')
+            {
+             output += wxTranslate(mLetter);
+             output_text->ChangeValue(output); 
+             mLetter = "";
+            }
+            else
+            {
+                mLetter += input[i];
+            }
         }
+        // output = wxTranslate(input[0]);
+        // output_text->ChangeValue(output);
 }
 
 
@@ -27,7 +36,6 @@ void MorsetoString::mapCreate()
     std::string ddash = dash + dash;
     std::string tdash = dash + dash + dash;
     std::string temp = dot + dash;
-    StringIntMap.insert(std::pair<std::string, int>(temp,0));
     temp = dash + dot + dot + dot;
     StringIntMap.insert(std::pair<std::string, int>(temp,1));
     temp = dash + dot + dash + dot;
@@ -62,7 +70,7 @@ void MorsetoString::mapCreate()
     StringIntMap.insert(std::pair<std::string, int>(temp,16));
     temp = dot + dash + dot;
     StringIntMap.insert(std::pair<std::string, int>(temp,17));
-    temp = tdash;
+    temp = tdot;
     StringIntMap.insert(std::pair<std::string, int>(temp,18));
     temp = dash;
     StringIntMap.insert(std::pair<std::string, int>(temp,19));
@@ -136,15 +144,22 @@ void MorsetoString::mapCreate()
     StringIntMap.insert(std::pair<std::string, int>(temp,53));
     temp = dash + dot + ddash + dot;                //(
     StringIntMap.insert(std::pair<std::string, int>(temp,54));
+    temp = dot + dash;
+    StringIntMap.insert(std::pair<std::string, int>(temp,55));
    
 
+}
+wxString MorsetoString::clear()
+{
+    output = "";
+    return output;
 }
 wxString MorsetoString::wxTranslate(wxString input)
 {
    wxString output = "";
     switch(StringIntMap[std::string(input.mb_str())])
     {
-        case 0: output = "A"; break; 
+        
         case 1: output = "B"; break; 
         case 2: output = "C"; break; 
         case 3: output = "D"; break; 
@@ -199,22 +214,21 @@ wxString MorsetoString::wxTranslate(wxString input)
         case 52: output = "$"; break; 
         case 53: output = "@"; break; 
         case 54: output = "("; break;  
+        case 55: output = "A"; break;  
+        default: output = "Invalid Code "; break;
     }
-
+    return output;
 }
 void MorsetoString::parseWhiteSpace(wxString input)
 {
-    wxString temp = "";
-    int letter = 0;
-    for(int i = 0; i<input.length(); i++)
-    {
-        if(input[i] == ' ')
-        {
-            mLetter[letter] = temp; 
-            letter++;
-            temp = "";
-        }
-        temp += input[i];
-    }
+    // wxString temp = "";
+    // int letter = 0;
+    //         mLetter[letter] = temp; 
+    //         letter++;
+    //         temp = "";
+    //     }
+    //     temp += input[i];
+        
+    // }
 }
 

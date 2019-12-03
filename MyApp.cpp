@@ -12,7 +12,7 @@ IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()
 {
-    Frame *frame = new Frame(wxT("Hello World"));
+    Frame *frame = new Frame(wxT("Morse Code Translator"));
     frame->Show( true );
     return true;
 }
