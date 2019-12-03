@@ -18,6 +18,7 @@ void TextPanel::init()
                                              textbox->GetValue());
 	translate_button->Bind    (wxEVT_BUTTON, &TextPanel::onClickTranslate, this);
 	translate_button->SetLabel("Translate");
+	//translate_button->Hide();
 	
 	textInput_sizer->Add(choose_text, 0, wxALIGN_CENTER, 0);
 	textInput_sizer->AddSpacer(10);
@@ -53,18 +54,22 @@ void TextPanel::init()
 
 void TextPanel::onClickTranslate(wxCommandEvent& event)
 {
-    translate();
+	
+	output_text->ChangeValue(S2M.clear());
+	S2M.translate(output_text,textbox);
 }
 
 void TextPanel::translate()
 {
-	if (morseCodeOutput)
-		output_text->ChangeValue(stringToMorse(textbox->GetValue()));
-	else
-	{
-		output_text->ChangeValue(morseToString(textbox->GetValue()));
-		//output_text->ChangeValue("Not implemented yet");
-	}
+	// if (morseCodeOutput)
+	// 	output_text->ChangeValue(stringToMorse(textbox->GetValue()));
+	// else
+	// {
+	// 	output_text->ChangeValue(morseToString(textbox->GetValue()));
+	// 	//output_text->ChangeValue("Not implemented yet");
+	// }
+	
+
 }
 
 void TextPanel::setMorseCoutOutput(bool in)

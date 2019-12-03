@@ -2,6 +2,7 @@
 #include "MyApp.hpp"
 #include <iostream>
 #include <string>
+#include "StringtoMorse.hpp"
 #include <wx/textentry.h>
 
 class TextPanel : public wxPanel
@@ -17,7 +18,7 @@ public:
 private:
 	wxTextCtrl *textbox;
 	wxTextCtrl *output_text;
-	
+	StringtoMorse S2M;
 	wxString stringToMorse(wxString);
 	wxString morseToString(wxString);
 	
