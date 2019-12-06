@@ -26,6 +26,5 @@ private:
 	
 	bool morseCodeOutput = true;
 	
-	void translate();
 	void init();
 };

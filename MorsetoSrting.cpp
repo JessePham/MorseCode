@@ -146,6 +146,8 @@ void MorsetoString::mapCreate()
     StringIntMap.insert(std::pair<std::string, int>(temp,54));
     temp = dot + dash;
     StringIntMap.insert(std::pair<std::string, int>(temp,55));
+    temp = "";
+    StringIntMap.insert(std::pair<std::string, int>(temp,56));
    
 
 }
@@ -215,20 +217,8 @@ wxString MorsetoString::wxTranslate(wxString input)
         case 53: output = "@"; break; 
         case 54: output = "("; break;  
         case 55: output = "A"; break;  
+        case 56: output = ""; break;
         default: output = "Invalid Code "; break;
     }
     return output;
 }
-void MorsetoString::parseWhiteSpace(wxString input)
-{
-    // wxString temp = "";
-    // int letter = 0;
-    //         mLetter[letter] = temp; 
-    //         letter++;
-    //         temp = "";
-    //     }
-    //     temp += input[i];
-        
-    // }
-}
-
